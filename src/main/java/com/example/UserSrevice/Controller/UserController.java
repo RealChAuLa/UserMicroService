@@ -43,11 +43,13 @@ public class UserController {
     public ResponseEntity<String> login(@RequestBody User user1) {
         boolean isAuthenticated = userService.authenticate(user1.getC_username(), user1.getC_password());
         if (isAuthenticated) {
-            return ResponseEntity.ok("Login successful");
+            // Return the username on successful login
+            return ResponseEntity.ok(user1.getC_username());
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
     }
+
 
     @GetMapping(path = "/usersall")
     public List<User_Cfavorites> getAllProducts() {
